@@ -37,11 +37,11 @@ class NoteForm extends HTMLElement {
         const form = this.querySelector("#add-note-form");
         form.addEventListener("submit", async (event) => {
             event.preventDefault();
-            const title = this.querySelector("#note-title").value;
-            const body = this.querySelector("#note-body").value;
+            const title = this.querySelector("#note-title").value.trim();
+            const body = this.querySelector("#note-body").value.trim();
 
             if (title && body) {
-                const newNote = { title, body, createdAt: new Date().toISOString(), archived: false };
+                const newNote = { title, body }; // ✅ HANYA title dan body
                 await this.addNoteToAPI(newNote);
                 form.reset();
             }
@@ -58,12 +58,14 @@ class NoteForm extends HTMLElement {
             });
 
             if (response.ok) {
-                document.querySelector('note-list').fetchNotes(); 
+                document.querySelector('note-list').fetchNotes();
             } else {
-                throw new Error('Failed to add note');
+                const errorData = await response.json();
+                throw new Error(errorData.message || 'Gagal menambahkan catatan');
             }
         } catch (error) {
             console.error('Error adding note:', error);
+            alert('Gagal menambahkan catatan: ' + error.message);
         } finally {
             hideLoading();
         }
@@ -86,20 +88,15 @@ class NoteItem extends HTMLElement {
                 <p>${this._noteData.body}</p>
                 <small>Dibuat pada: ${new Date(this._noteData.createdAt).toLocaleDateString()}</small>
                 <div class="buttons">
-                    <button class="edit-btn">Edit</button>
                     <button class="delete-btn">Hapus</button>
                 </div>
             </div>
         `;
 
         this.querySelector(".delete-btn").addEventListener("click", async () => {
-            await this.deleteNoteFromAPI();
-        });
-
-        this.querySelector(".edit-btn").addEventListener("click", () => {
-            document.getElementById("note-title").value = this._noteData.title;
-            document.getElementById("note-body").value = this._noteData.body;
-            this.remove();
+            if (confirm("Yakin ingin menghapus catatan ini?")) {
+                await this.deleteNoteFromAPI();
+            }
         });
     }
 
@@ -113,10 +110,12 @@ class NoteItem extends HTMLElement {
             if (response.ok) {
                 this.remove();
             } else {
-                throw new Error('Failed to delete note');
+                const errorData = await response.json();
+                throw new Error(errorData.message || 'Gagal menghapus catatan');
             }
         } catch (error) {
             console.error('Error deleting note:', error);
+            alert('Gagal menghapus catatan: ' + error.message);
         } finally {
             hideLoading();
         }
@@ -139,7 +138,8 @@ class NoteList extends HTMLElement {
             showLoading();
             const response = await fetch('https://notes-api.dicoding.dev/v2/notes');
             if (!response.ok) {
-                throw new Error('Failed to fetch notes');
+                const errorData = await response.json();
+                throw new Error(errorData.message || 'Gagal mengambil data catatan');
             }
 
             const data = await response.json();
@@ -147,6 +147,7 @@ class NoteList extends HTMLElement {
             this.render();
         } catch (error) {
             console.error('Error fetching notes:', error);
+            alert('Gagal mengambil daftar catatan: ' + error.message);
         } finally {
             hideLoading();
         }
