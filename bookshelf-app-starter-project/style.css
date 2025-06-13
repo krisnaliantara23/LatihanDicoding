@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -73,7 +73,6 @@ body {
   .delete-button:hover {
     background-color: #b52b3a;
   }
-=======
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -148,5 +147,3 @@ body {
   .delete-button:hover {
     background-color: #b52b3a;
   }
->>>>>>> e99eedf304e8763eb762fc3c7d88494aec0e9cc7
-  

@@ -1,0 +1,19 @@
+{
+  "name": "starter-project-with-vite",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "start": "lite-server",
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "lite-server": "^2.6.1",
+    "vite": "^6.2.0"
+  },
+  "dependencies": {
+    "leaflet": "^1.9.4"
+  }
+}

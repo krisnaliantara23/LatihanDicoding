@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>App</title>
+    <link rel="shortcut icon" href="/favicon.png" />
+
+    <!-- Leaflet CSS -->
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    />
+    <!-- Leaflet JS -->
+    <script
+      src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    ></script>
+
+    <!-- Main App JS -->
+    <script type="module" src="/scripts/index.js"></script>
+  </head>
+
+  <body>
+    <!-- Skip to content link -->
+    <a href="#main-content" class="skip-to-content">Skip to Content</a>
+
+    <header>
+      <div class="main-header container">
+        <a class="brand-name" href="#/">App</a>
+
+        <nav id="navigation-drawer" class="navigation-drawer">
+  <ul id="nav-list" class="nav-list">
+    <li><a href="#/">Beranda</a></li>
+    <li><a href="#/about">About</a></li>
+    <li><a href="#/add">Tambah Story</a></li>
+    <li><a href="#/login">Login</a></li> <!-- Link menuju halaman login -->
+  </ul>
+</nav>
+
+
+        <button id="drawer-button" class="drawer-button">☰</button>
+      </div>
+    </header>
+
+    <main id="main-content" class="main-content"></main>
+
+    <!-- Footer -->
+    <footer>
+      <p>&copy; 2025 Aplikasi Berbagi Story. Semua hak cipta dilindungi.</p>
+    </footer>
+  </body>
+</html>
