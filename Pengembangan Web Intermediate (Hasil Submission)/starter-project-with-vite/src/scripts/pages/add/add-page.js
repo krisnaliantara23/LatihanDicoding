@@ -15,8 +15,14 @@ export default class AddPage {
             <textarea id="description" name="description" required></textarea>
           </div>
           <div>
-            <label for="photo">Foto</label>
-            <input type="file" id="photo" name="photo" accept="image/*" capture="environment" required />
+            <label for="camera">Kamera</label>
+            <video id="camera" autoplay playsinline width="300"></video>
+            <button type="button" id="captureBtn">Ambil Foto</button>
+            <canvas id="canvas" width="300" height="300" style="display: none;"></canvas>
+          </div>
+          <div>
+            <label for="photo">Upload Manual (Opsional)</label>
+            <input type="file" id="photo" name="photo" accept="image/*" />
           </div>
           <div>
             <label>Lokasi (klik pada peta)</label>
@@ -31,6 +37,7 @@ export default class AddPage {
   }
 
   async afterRender() {
+    // Inisialisasi Peta
     const map = L.map('map').setView([-6.200000, 106.816666], 13);
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '&copy; OpenStreetMap contributors'
@@ -47,10 +54,38 @@ export default class AddPage {
       marker = L.marker([lat, lng]).addTo(map).bindPopup('Lokasi dipilih').openPopup();
     });
 
+    // Inisialisasi Kamera
+    const video = document.getElementById('camera');
+    const canvas = document.getElementById('canvas');
+    const captureBtn = document.getElementById('captureBtn');
+    let capturedFile;
+
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+      video.srcObject = stream;
+
+      captureBtn.addEventListener('click', () => {
+        canvas.getContext('2d').drawImage(video, 0, 0, canvas.width, canvas.height);
+        canvas.toBlob((blob) => {
+          capturedFile = new File([blob], 'captured.jpg', { type: 'image/jpeg' });
+          // Isi ke input file secara tidak langsung
+          document.getElementById('photo').files = createFileList(capturedFile);
+        });
+      });
+
+      function createFileList(file) {
+        const dataTransfer = new DataTransfer();
+        dataTransfer.items.add(file);
+        return dataTransfer.files;
+      }
+    } catch (err) {
+      console.warn('Kamera tidak dapat diakses:', err);
+    }
+
+    // Handle Submit Form
     const form = document.getElementById('storyForm');
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
-      const name = form.name.value;
       const description = form.description.value;
       const photo = form.photo.files[0];
       const lat = form.lat.value;
@@ -64,13 +99,12 @@ export default class AddPage {
         formData.append('lon', lon);
       }
 
-      const token = localStorage.getItem('token'); // Mendapatkan token login
-
+      const token = localStorage.getItem('token');
       try {
         const response = await fetch('https://story-api.dicoding.dev/v1/stories', {
           method: 'POST',
           headers: {
-            'Authorization': `Bearer ${token}`,
+            Authorization: `Bearer ${token}`,
           },
           body: formData
         });
@@ -84,8 +118,8 @@ export default class AddPage {
           alert(`Gagal: ${result.message}`);
         }
       } catch (error) {
-        alert('Terjadi kesalahan saat mengirim data.');
         console.error(error);
+        alert('Terjadi kesalahan saat mengirim data.');
       }
     });
   }

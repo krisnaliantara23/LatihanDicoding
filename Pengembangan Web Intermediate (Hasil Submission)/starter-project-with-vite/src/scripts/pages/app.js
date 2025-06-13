@@ -36,12 +36,16 @@ class App {
   }
 
   async renderPage() {
-    const url = getActiveRoute();
-    const page = routes[url];
+  this.#content.classList.add('fade-out');
+  await new Promise((r) => setTimeout(r, 300));
+  const url = getActiveRoute();
+  const page = routes[url];
+  this.#content.innerHTML = await page.render();
+  await page.afterRender();
+  this.#content.classList.remove('fade-out');
+  this.#content.classList.add('fade-in');
+}
 
-    this.#content.innerHTML = await page.render();
-    await page.afterRender();
-  }
 }
 
 export default App;
