@@ -1,5 +1,5 @@
 export const getStories = async () => {
-  const token = localStorage.getItem('token'); // pastikan token sudah disimpan
+  const token = localStorage.getItem('token'); // Pastikan user login
   const response = await fetch('https://story-api.dicoding.dev/v1/stories?location=1', {
     headers: {
       'Authorization': `Bearer ${token}`,
@@ -13,4 +13,3 @@ export const getStories = async () => {
   const data = await response.json();
   return data.listStory;
 };
-
