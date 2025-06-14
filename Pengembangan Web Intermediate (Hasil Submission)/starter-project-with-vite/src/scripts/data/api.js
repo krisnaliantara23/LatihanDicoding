@@ -1,6 +1,3 @@
-const API_KEY = 'd9439aa546664d778bab2395ca525287';
-const BASE_URL = 'https://api.themoviedb.org/3';
-
 export const getStories = async () => {
   const token = localStorage.getItem('token'); // pastikan token sudah disimpan
   const response = await fetch('https://story-api.dicoding.dev/v1/stories?location=1', {
