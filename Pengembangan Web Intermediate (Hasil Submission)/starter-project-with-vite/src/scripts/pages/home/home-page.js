@@ -1,4 +1,5 @@
 import { getStories } from '../../data/api';
+import { getAllFilms } from '../../utils/db.js';
 
 export default class HomePage {
   async render() {
@@ -23,13 +24,11 @@ export default class HomePage {
         return;
       }
 
-      // Inisialisasi Leaflet map
-      const map = L.map(mapElement).setView([-2.5489, 118.0149], 4); // Koordinat Indonesia
+      const map = L.map(mapElement).setView([-2.5489, 118.0149], 4);
       L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '© OpenStreetMap contributors'
       }).addTo(map);
 
-      // Render tiap story
       stories.forEach((story) => {
         const item = document.createElement('div');
         item.classList.add('story-card');
@@ -41,7 +40,6 @@ export default class HomePage {
         `;
         container.appendChild(item);
 
-        // Tambahkan marker ke peta
         if (story.lat && story.lon) {
           L.marker([story.lat, story.lon])
             .addTo(map)
@@ -50,15 +48,25 @@ export default class HomePage {
       });
 
     } catch (error) {
-      console.error('Gagal mengambil data story:', error);
-      container.innerHTML = `
-        <p style="color: red; margin-top: 1rem;">
-          Gagal memuat data. Silakan login terlebih dahulu.
-        </p>
-        <p>
-          <a href="#/login">Klik di sini untuk login</a>
-        </p>
-      `;
+      console.warn('Gagal fetch dari API. Coba dari IndexedDB...');
+      const offlineStories = await getAllFilms();
+      if (offlineStories.length > 0) {
+        offlineStories.forEach((story) => {
+          const item = document.createElement('div');
+          item.classList.add('story-card');
+          item.innerHTML = `
+            <h2 class="story-title">${story.name}</h2>
+            <p>${story.description}</p>
+            <p><strong>Lat:</strong> ${story.lat}, <strong>Lng:</strong> ${story.lon}</p>
+            <p><em>(Disimpan Offline)</em></p>
+          `;
+          container.appendChild(item);
+        });
+      } else {
+        container.innerHTML = `
+          <p style="color: red; margin-top: 1rem;">Gagal memuat data dari server maupun lokal.</p>
+        `;
+      }
     }
   }
 }

@@ -3,7 +3,7 @@ const pushSubscribe = async () => {
     const registration = await navigator.serviceWorker.ready;
     const subscribeOptions = {
       userVisibleOnly: true,
-      applicationServerKey: urlBase64ToUint8Array('YOUR_PUBLIC_VAPID_KEY') // ← Ganti ini
+      applicationServerKey: urlBase64ToUint8Array('BLQw8r4FdEICr0Yw_QkqKTK_SGw7UZmTfpLCJoPTM_ygqPdzesGaDySO2aYY9gWNMuAec4_VEiksLw8lsY3oHw0') // ← Ganti ini
     };
 
     const subscription = await registration.pushManager.subscribe(subscribeOptions);

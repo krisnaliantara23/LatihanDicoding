@@ -1,4 +1,5 @@
 import L from 'leaflet';
+import { saveFilm } from '../../utils/db.js';
 
 export default class AddPage {
   async render() {
@@ -37,7 +38,6 @@ export default class AddPage {
   }
 
   async afterRender() {
-    // Inisialisasi Peta
     const map = L.map('map').setView([-6.200000, 106.816666], 13);
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '&copy; OpenStreetMap contributors'
@@ -54,7 +54,6 @@ export default class AddPage {
       marker = L.marker([lat, lng]).addTo(map).bindPopup('Lokasi dipilih').openPopup();
     });
 
-    // Inisialisasi Kamera
     const video = document.getElementById('camera');
     const canvas = document.getElementById('canvas');
     const captureBtn = document.getElementById('captureBtn');
@@ -68,7 +67,6 @@ export default class AddPage {
         canvas.getContext('2d').drawImage(video, 0, 0, canvas.width, canvas.height);
         canvas.toBlob((blob) => {
           capturedFile = new File([blob], 'captured.jpg', { type: 'image/jpeg' });
-          // Isi ke input file secara tidak langsung
           document.getElementById('photo').files = createFileList(capturedFile);
         });
       });
@@ -82,10 +80,10 @@ export default class AddPage {
       console.warn('Kamera tidak dapat diakses:', err);
     }
 
-    // Handle Submit Form
     const form = document.getElementById('storyForm');
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
+      const name = form.name.value;
       const description = form.description.value;
       const photo = form.photo.files[0];
       const lat = form.lat.value;
@@ -115,11 +113,19 @@ export default class AddPage {
           alert('Story berhasil dikirim!');
           window.location.hash = '/';
         } else {
-          alert(`Gagal: ${result.message}`);
+          throw new Error(result.message);
         }
       } catch (error) {
         console.error(error);
-        alert('Terjadi kesalahan saat mengirim data.');
+        await saveFilm({
+          name,
+          description,
+          lat,
+          lon,
+          offline: true,
+          timestamp: Date.now()
+        });
+        alert('Story gagal dikirim, tapi disimpan offline.');
       }
     });
   }
