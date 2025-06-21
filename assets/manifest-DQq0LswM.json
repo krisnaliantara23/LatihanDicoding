@@ -1,44 +1,35 @@
 {
   "name": "Aplikasi Film Modern",
   "short_name": "StoryApp",
-  "start_url": "/LatihanDicoding",
+  "start_url": "/LatihanDicoding/",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#000000",
+  "orientation": "portrait-primary",
+  "scope": "/LatihanDicoding/",
   "icons": [
     {
-      "src": "icons/popcorn.png",
+      "src": "/LatihanDicoding/popcorn.png",
       "sizes": "192x192",
       "type": "image/png"
     },
     {
-      "src": "icons/cinema.png",
+      "src": "/LatihanDicoding/cinema.png",
       "sizes": "512x512",
       "type": "image/png"
     }
-    
   ],
   "shortcuts": [
     {
       "name": "Tambah Film",
-      "url": "/#/add",
+      "url": "/LatihanDicoding/#/add",
       "icons": [
         {
-          "src": "icons/video.png",
+          "src": "/LatihanDicoding/video.png",
           "sizes": "192x192",
           "type": "image/png"
         }
       ]
     }
-  ],
-  "icons": [
-  {
-    "src": "./icons/popcorn.png",
-    "sizes": "192x192",
-    "type": "image/png"
-  }
-],
-
-  "scope": "/",
-  "orientation": "portrait-primary"
+  ]
 }
