@@ -8,17 +8,17 @@
   "orientation": "portrait-primary",
   "scope": "/LatihanDicoding/",
   "icons": [
-    {
-      "src": "/LatihanDicoding/popcorn.png",
-      "sizes": "192x192",
-      "type": "image/png"
-    },
-    {
-      "src": "/LatihanDicoding/cinema.png",
-      "sizes": "512x512",
-      "type": "image/png"
-    }
-  ],
+  {
+    "src": "icons/popcorn.png",
+    "sizes": "192x192",
+    "type": "image/png"
+  },
+  {
+    "src": "icons/cinema.png",
+    "sizes": "512x512",
+    "type": "image/png"
+  }
+],
   "shortcuts": [
     {
       "name": "Tambah Film",
