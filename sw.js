@@ -1,5 +1,5 @@
 const CACHE_NAME = 'film-cache-v1';
-const BASE_PATH = '/LatihanDicoding'; 
+const BASE_PATH = '/LatihanDicoding';
 
 const urlsToCache = [
   `${BASE_PATH}/`,
@@ -7,13 +7,11 @@ const urlsToCache = [
   `${BASE_PATH}/manifest.json`,
   `${BASE_PATH}/styles/styles.css`,
   `${BASE_PATH}/scripts/index.js`,
-  `${BASE_PATH}/scripts/sw.js`,
-  `${BASE_PATH}/popcorn.png`,
-  `${BASE_PATH}/cinema.png`,
-  `${BASE_PATH}/video.png` 
+  `${BASE_PATH}/icons/popcorn.png`,
+  `${BASE_PATH}/icons/cinema.png`,
 ];
 
-
+// Install
 self.addEventListener('install', (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME)
@@ -21,7 +19,7 @@ self.addEventListener('install', (event) => {
   );
 });
 
-
+// Activate
 self.addEventListener('activate', (event) => {
   const cacheWhitelist = [CACHE_NAME];
   event.waitUntil(
@@ -37,7 +35,7 @@ self.addEventListener('activate', (event) => {
   );
 });
 
-
+// Fetch
 self.addEventListener('fetch', (event) => {
   event.respondWith(
     caches.match(event.request).then((cachedResponse) =>
@@ -46,23 +44,24 @@ self.addEventListener('fetch', (event) => {
   );
 });
 
-// Push Notification
+// Push
 self.addEventListener('push', (event) => {
-  const options = {
-    body: event.data.text(),
-    icon: `${BASE_PATH}/icons/popcorn.png`,
-    badge: `${BASE_PATH}/icons/cinema.png`,
-  };
+  let data = { title: 'Notifikasi', options: { body: 'Ada update baru!' } };
+  try {
+    if (event.data) data = event.data.json();
+  } catch {}
 
   event.waitUntil(
-    self.registration.showNotification('New Story Available!', options)
+    self.registration.showNotification(data.title, {
+      ...data.options,
+      icon: `${BASE_PATH}/icons/popcorn.png`,
+      badge: `${BASE_PATH}/icons/cinema.png`,
+    })
   );
 });
 
 // Notification Click
 self.addEventListener('notificationclick', (event) => {
   event.notification.close();
-  event.waitUntil(
-    clients.openWindow(`${BASE_PATH}/`)
-  );
+  event.waitUntil(clients.openWindow(`${BASE_PATH}/`));
 });
