@@ -3,8 +3,9 @@ var An=c=>{throw TypeError(c)};var ci=(c,u,a)=>u.has(c)||An("Cannot "+a);var it=
         <h1>Daftar Cerita</h1>
         <div id="map" style="height: 300px; margin-bottom: 1.5rem;"></div>
         <div id="stories" class="story-list"></div>
+        <a href="#/saved-stories">Lihat Saved Stories</a>
       </section>
-    `}async afterRender(){const u=document.querySelector("#stories"),a=document.getElementById("map");try{const v=await bs();if(!v||v.length===0){u.innerHTML="<p>Tidak ada story yang tersedia.</p>";return}const f=L.map(a).setView([-2.5489,118.0149],4);L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",{attribution:"© OpenStreetMap contributors"}).addTo(f),v.forEach(m=>{const p=document.createElement("div");p.classList.add("story-card"),p.innerHTML=`
+    `}async afterRender(){const u=document.querySelector("#stories"),a=document.getElementById("map");u.innerHTML="<p>Loading stories...</p>";try{const v=await bs();if(!v||v.length===0){u.innerHTML="<p>Tidak ada story yang tersedia.</p>";return}const f=L.map(a).setView([-2.5489,118.0149],4);L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",{attribution:"© OpenStreetMap contributors"}).addTo(f),v.forEach(m=>{const p=document.createElement("div");p.classList.add("story-card"),p.innerHTML=`
           <img class="story-img" src="${m.photoUrl}" alt="${m.name}" />
           <h2 class="story-title">${m.name}</h2>
           <p>${m.description}</p>
