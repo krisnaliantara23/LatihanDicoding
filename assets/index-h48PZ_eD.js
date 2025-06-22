@@ -5,7 +5,7 @@ var An=c=>{throw TypeError(c)};var ci=(c,u,a)=>u.has(c)||An("Cannot "+a);var it=
         <div id="map" style="height: 300px; margin-bottom: 1.5rem;"></div>
         <div id="stories" class="story-list"></div>
       </section>
-    `}async afterRender(){const u=document.querySelector("#stories"),a=document.getElementById("map"),g=document.getElementById("SubscribeButton");g&&(console.log("Subscribe button ditemukan"),g.addEventListener("click",()=>{console.log("Subscribe button diklik"),Kn()}));try{const f=await Ls();if(!f||f.length===0){u.innerHTML="<p>Tidak ada story yang tersedia.</p>";return}const y=L.map(a).setView([-2.5489,118.0149],4);L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",{attribution:"© OpenStreetMap contributors"}).addTo(y),f.forEach(_=>{const O=document.createElement("div");O.classList.add("story-card"),O.innerHTML=`
+    `}async afterRender(){const u=document.querySelector("#stories"),a=document.getElementById("map"),g=document.getElementById("SubscribeButton");g?(console.log("[DEBUG] Tombol Subscribe ditemukan"),g.addEventListener("click",()=>{console.log("[DEBUG] Tombol Subscribe diklik"),Kn()})):console.warn("[DEBUG] Tombol Subscribe TIDAK ditemukan");try{const f=await Ls();if(!f||f.length===0){u.innerHTML="<p>Tidak ada story yang tersedia.</p>";return}const y=L.map(a).setView([-2.5489,118.0149],4);L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",{attribution:"© OpenStreetMap contributors"}).addTo(y),f.forEach(_=>{const O=document.createElement("div");O.classList.add("story-card"),O.innerHTML=`
           <img class="story-img" src="${_.photoUrl}" alt="${_.name}" />
           <h2 class="story-title">${_.name}</h2>
           <p>${_.description}</p>
