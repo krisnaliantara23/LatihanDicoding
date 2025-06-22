@@ -54,24 +54,34 @@
     <!-- Footer -->
     <footer>
       <p>&copy; 2025 Aplikasi Berbagi Story. Semua hak cipta dilindungi.</p>
+
+      <!-- Tombol subscribe opsional -->
+      <div class="subscribe-container">
+        <button id="subscribe-button">Langganan Notifikasi</button>
+        <p id="subscribe-feedback" style="display: none;">Terima kasih sudah berlangganan!</p>
+      </div>
     </footer>
 
-    <!-- Script untuk toggle drawer -->
+    <!-- Script untuk toggle drawer & subscribe -->
     <script>
       const drawer = document.getElementById("navigation-drawer");
       const button = document.getElementById("drawer-button");
 
-      button.addEventListener("click", () => {
-        drawer.classList.toggle("open");
-      });
+      if (drawer && button) {
+        button.addEventListener("click", () => {
+          drawer.classList.toggle("open");
+        });
+      }
 
-      const subscribeButton = document.getElementById('subscribe-button');
-      const subscribeFeedback = document.getElementById('subscribe-feedback');
+      const subscribeButton = document.getElementById("subscribe-button");
+      const subscribeFeedback = document.getElementById("subscribe-feedback");
 
-      subscribeButton.addEventListener('click', () => {
-        subscribeButton.style.display = 'none';
-        subscribeFeedback.style.display = 'block';
-      });
+      if (subscribeButton && subscribeFeedback) {
+        subscribeButton.addEventListener("click", () => {
+          subscribeButton.style.display = "none";
+          subscribeFeedback.style.display = "block";
+        });
+      }
     </script>
   </body>
 </html>
