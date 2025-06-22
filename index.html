@@ -6,10 +6,10 @@
     <title>Dicoding Story App</title>
 
     <!-- Favicon -->
-    <link rel="shortcut icon" href="/favicon.png" /> <!-- Path yang benar, tanpa public/ -->
+    <link rel="shortcut icon" href="images/favicon.png" />
 
     <!-- Manifest -->
-    <link rel="manifest" href="/LatihanDicoding/manifest.json" /> <!-- Path yang benar, tanpa public/ -->
+    <link rel="manifest" href="manifest.json" />
 
     <!-- Leaflet CSS -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
@@ -19,8 +19,8 @@
     <!-- Leaflet JS -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
-    <!-- Main JS (Vite akan rewritenya otomatis saat build) -->
-    <script type="module" crossorigin src="/LatihanDicoding/assets/index-hEIo4-uv.js"></script>
+    <!-- Main JS -->
+    <script type="module" crossorigin src="/LatihanDicoding/assets/index-DtfiOOwm.js"></script>
     <link rel="stylesheet" crossorigin href="/LatihanDicoding/assets/index-DdWEYQtM.css">
   </head>
 
@@ -40,7 +40,6 @@
             <li><a href="#/about">About</a></li>
             <li><a href="#/login">Login</a></li>
             <li><a href="#/register">Register</a></li>
-            <!-- Menambahkan link untuk Saved Stories -->
             <li><a href="#/saved-stories">Saved Stories</a></li>
           </ul>
         </nav>
@@ -50,20 +49,7 @@
     </header>
 
     <!-- Main Content -->
-    <main id="main-content" class="main-content">
-      <!-- Subscribe Button Section -->
-      <section id="subscribe-section">
-        <button id="subscribe-button" class="subscribe-button">
-          <span class="button-text">Subscribe</span>
-          <span class="button-icon">🔔</span>
-        </button>
-
-        <!-- Feedback setelah subscribe -->
-        <div id="subscribe-feedback" class="subscribe-feedback" style="display: none;">
-          Terima kasih telah berlangganan!
-        </div>
-      </section>
-    </main>
+    <main id="main-content" class="main-content"></main>
 
     <!-- Footer -->
     <footer>
@@ -79,15 +65,11 @@
         drawer.classList.toggle("open");
       });
 
-      // Menangani klik tombol Subscribe
       const subscribeButton = document.getElementById('subscribe-button');
       const subscribeFeedback = document.getElementById('subscribe-feedback');
 
       subscribeButton.addEventListener('click', () => {
-        // Menyembunyikan tombol subscribe
         subscribeButton.style.display = 'none';
-
-        // Menampilkan feedback
         subscribeFeedback.style.display = 'block';
       });
     </script>

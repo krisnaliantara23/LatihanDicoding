@@ -1,18 +1,22 @@
 const CACHE_NAME = 'film-cache-v1';
 const urlsToCache = [
-  '/LatihanDicoding/',
-  '/LatihanDicoding/index.html',
-  '/LatihanDicoding/icons/popcorn.png',
-  '/LatihanDicoding/icons/cinema.png',
-  '/LatihanDicoding/manifest.json',
-  '/LatihanDicoding/sw.js',
-  // Tidak cache styles.css dan index.js langsung
-  // karena mereka dibundling dan berubah nama
+  '/',
+  '/index.html',
+  '/manifest.json',
+  '/sw.js',
+  '/styles/styles.css',
+  '/scripts/index.js',
+  '/icons/popcorn.png',
+  '/icons/cinema.png',
+  '/images/favicon.png',  // Favicon juga harus dicache
+  '/images/logo.png',     // Logo harus dicache
 ];
 
 self.addEventListener('install', (event) => {
   event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => cache.addAll(urlsToCache))
+    caches.open(CACHE_NAME).then((cache) => {
+      return cache.addAll(urlsToCache);
+    })
   );
 });
 
@@ -43,8 +47,8 @@ self.addEventListener('fetch', (event) => {
 self.addEventListener('push', (event) => {
   const options = {
     body: event.data.text(),
-    icon: '/LatihanDicoding/icons/popcorn.png',
-    badge: '/LatihanDicoding/icons/cinema.png',
+    icon: '/icons/popcorn.png',
+    badge: '/icons/cinema.png',
   };
 
   event.waitUntil(
@@ -54,5 +58,5 @@ self.addEventListener('push', (event) => {
 
 self.addEventListener('notificationclick', (event) => {
   event.notification.close();
-  event.waitUntil(clients.openWindow('/LatihanDicoding/'));
+  event.waitUntil(clients.openWindow('/'));
 });
