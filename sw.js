@@ -6,9 +6,8 @@ const urlsToCache = [
   '/LatihanDicoding/scripts/index.js',
   '/LatihanDicoding/icons/popcorn.png',
   '/LatihanDicoding/icons/cinema.png',
-  '/LatihanDicoding/scripts/sw.js',
+  '/LatihanDicoding/sw.js',
 ];
-
 
 self.addEventListener('install', (event) => {
   event.waitUntil(
