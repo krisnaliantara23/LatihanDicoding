@@ -1,3 +1,4 @@
+sw.js
 const CACHE_NAME = 'film-cache-v1';
 const BASE_PATH = '/LatihanDicoding';
 
