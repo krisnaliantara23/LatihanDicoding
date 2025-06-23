@@ -20,7 +20,7 @@
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
     <!-- Main JS -->
-    <script type="module" crossorigin src="/LatihanDicoding/assets/index-DtfiOOwm.js"></script>
+    <script type="module" crossorigin src="/LatihanDicoding/assets/index-hDr1GqIA.js"></script>
     <link rel="stylesheet" crossorigin href="/LatihanDicoding/assets/index-DdWEYQtM.css">
   </head>
 
@@ -61,27 +61,5 @@
         <p id="subscribe-feedback" style="display: none;">Terima kasih sudah berlangganan!</p>
       </div>
     </footer>
-
-    <!-- Script untuk toggle drawer & subscribe -->
-    <script>
-      const drawer = document.getElementById("navigation-drawer");
-      const button = document.getElementById("drawer-button");
-
-      if (drawer && button) {
-        button.addEventListener("click", () => {
-          drawer.classList.toggle("open");
-        });
-      }
-
-      const subscribeButton = document.getElementById("subscribe-button");
-      const subscribeFeedback = document.getElementById("subscribe-feedback");
-
-      if (subscribeButton && subscribeFeedback) {
-        subscribeButton.addEventListener("click", () => {
-          subscribeButton.style.display = "none";
-          subscribeFeedback.style.display = "block";
-        });
-      }
-    </script>
   </body>
 </html>
