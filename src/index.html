@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dicoding Story App</title>
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="images/favicon.png" />
+
+    <!-- Manifest -->
+    <link rel="manifest" href="manifest.json" />
+
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
+    <!-- Main Styles -->
+    <link rel="stylesheet" href="./styles/styles.css" />
+
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+    <!-- Main JS -->
+    <script type="module" src="./scripts/index.js"></script>
+  </head>
+
+  <body>
+    <!-- Skip to content -->
+    <a href="#main-content" class="skip-to-content">Lewati ke Konten</a>
+
+    <!-- Header -->
+    <header>
+      <div class="main-header container">
+        <a class="brand-name" href="#/">Dicoding Story App</a>
+
+        <nav id="navigation-drawer" class="navigation-drawer">
+          <ul id="nav-list" class="nav-list">
+            <li><a href="#/">Home</a></li>
+            <li><a href="#/add">Tambah Story</a></li>
+            <li><a href="#/about">About</a></li>
+            <li><a href="#/login">Login</a></li>
+            <li><a href="#/register">Register</a></li>
+            <li><a href="#/saved-stories">Saved Stories</a></li>
+          </ul>
+        </nav>
+
+        <button id="drawer-button" class="drawer-button">☰</button>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main id="main-content" class="main-content"></main>
+
+    <!-- Footer -->
+    <footer>
+      <p>&copy; 2025 Aplikasi Berbagi Story. Semua hak cipta dilindungi.</p>
+
+      <!-- Tombol subscribe opsional -->
+      <div class="subscribe-container">
+        <button id="subscribe-button">Langganan Notifikasi</button>
+        <p id="subscribe-feedback" style="display: none;">Terima kasih sudah berlangganan!</p>
+      </div>
+    </footer>
+  </body>
+</html>

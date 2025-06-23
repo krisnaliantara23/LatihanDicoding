@@ -1,0 +1,21 @@
+{
+  "name": "Dicoding Story App",
+  "short_name": "Story App",
+  "description": "Aplikasi berbagi cerita",
+  "start_url": "/LatihanDicoding/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#000000",
+  "icons": [
+    {
+      "src": "icons/popcorn.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "icons/cinema.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
