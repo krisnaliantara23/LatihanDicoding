@@ -11,55 +11,48 @@
     <!-- Manifest -->
     <link rel="manifest" href="manifest.json" />
 
-    <!-- Leaflet CSS -->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-
     <!-- Main Styles -->
 
     <!-- Leaflet JS -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
-    <!-- Main JS -->
-    <script type="module" crossorigin src="/LatihanDicoding/assets/index-hDr1GqIA.js"></script>
-    <link rel="stylesheet" crossorigin href="/LatihanDicoding/assets/index-DdWEYQtM.css">
+    <!-- Main Script -->
+    <script type="module" crossorigin src="/LatihanDicoding/assets/main-DjkWXYWp.js"></script>
+    <link rel="stylesheet" crossorigin href="/LatihanDicoding/assets/main-B2VBVSXv.css">
   </head>
 
   <body>
-    <!-- Skip to content -->
-    <a href="#main-content" class="skip-to-content">Lewati ke Konten</a>
-
-    <!-- Header -->
+    <!-- Navigasi -->
     <header>
-      <div class="main-header container">
-        <a class="brand-name" href="#/">Dicoding Story App</a>
-
-        <nav id="navigation-drawer" class="navigation-drawer">
-          <ul id="nav-list" class="nav-list">
-            <li><a href="#/">Home</a></li>
-            <li><a href="#/add">Tambah Story</a></li>
-            <li><a href="#/about">About</a></li>
-            <li><a href="#/login">Login</a></li>
-            <li><a href="#/register">Register</a></li>
-            <li><a href="#/saved-stories">Saved Stories</a></li>
-          </ul>
-        </nav>
-
-        <button id="drawer-button" class="drawer-button">☰</button>
-      </div>
+      <button id="drawer-button" aria-label="Menu">☰</button>
+      <nav id="navigation-drawer" class="drawer">
+        <ul>
+          <li><a href="#/">Beranda</a></li>
+          <li><a href="#/add">Tambah Story</a></li>
+          <li><a href="#/about">Tentang</a></li>
+          <li><a href="#/saved">Story Tersimpan</a></li>
+        </ul>
+      </nav>
     </header>
 
-    <!-- Main Content -->
-    <main id="main-content" class="main-content"></main>
+    <!-- Konten Utama -->
+    <main id="main-content">
+      <div id="app"></div>
+    </main>
 
-    <!-- Footer -->
-    <footer>
-      <p>&copy; 2025 Aplikasi Berbagi Story. Semua hak cipta dilindungi.</p>
-
-      <!-- Tombol subscribe opsional -->
-      <div class="subscribe-container">
-        <button id="subscribe-button">Langganan Notifikasi</button>
-        <p id="subscribe-feedback" style="display: none;">Terima kasih sudah berlangganan!</p>
-      </div>
-    </footer>
+    <!-- Service Worker Registration -->
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/LatihanDicoding/sw.js')
+            .then((registration) => {
+              console.log('Service Worker berhasil terdaftar:', registration);
+            })
+            .catch((error) => {
+              console.error('Gagal mendaftarkan Service Worker:', error);
+            });
+        });
+      }
+    </script>
   </body>
 </html>
