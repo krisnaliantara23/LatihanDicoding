@@ -1,26 +1,24 @@
-const CACHE_NAME = 'film-cache-v2';
-const BASE_PATH = '/LatihanDicoding';  // Sesuaikan dengan base path aplikasi Anda
+const BASE_URL = '/LatihanDicoding/'; // SESUAI VITE CONFIG
 
-const urlsToCache = [
-  `${BASE_PATH}/`,
-  `${BASE_PATH}/index.html`,
-  `${BASE_PATH}/manifest.json`,
-  `${BASE_PATH}/sw.js`,
-  `${BASE_PATH}/styles/styles.css`,
-  `${BASE_PATH}/scripts/index.js`,
-  `${BASE_PATH}/icons/popcorn.png`,
-  `${BASE_PATH}/icons/cinema.png`,
-  `${BASE_PATH}/images/favicon.png`,
-  `${BASE_PATH}/images/logo.png`,
+const assetsToCache = [
+  `${BASE_URL}`,
+  `${BASE_URL}index.html`,
+  `${BASE_URL}styles/styles.css`,
+  `${BASE_URL}scripts/index.js`,
+  `${BASE_URL}manifest.json`,
+  `${BASE_URL}images/favicon.png`,
+  `${BASE_URL}icons/icon-192.png`,
+  `${BASE_URL}icons/icon-512.png`,
 ];
 
-// Install Service Worker dan simpan resource ke cache
 self.addEventListener('install', (event) => {
-  self.skipWaiting();  // Langsung aktifkan SW setelah diinstall
   event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => cache.addAll(urlsToCache))
+    caches.open('v1').then((cache) => {
+      return cache.addAll(assetsToCache);
+    })
   );
 });
+
 
 // Aktivasi SW dan hapus cache lama yang tidak dipakai
 self.addEventListener('activate', (event) => {
