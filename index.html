@@ -4,44 +4,53 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Dicoding Story App</title>
+    <link rel="shortcut icon" href="/images/favicon.png" />
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
-    <link rel="shortcut icon" href="/LatihanDicoding/images/favicon.png" />
-    <link rel="manifest" href="/LatihanDicoding/manifest.json" />
-
-    <link
-      rel="stylesheet"
-      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-      />
- 
-    <script
-      src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-      ></script>
-   <script type="module" crossorigin src="/LatihanDicoding/assets/main-Bzia95M-.js"></script>
-   <link rel="stylesheet" crossorigin href="/LatihanDicoding/assets/main-Cv_f3T_S.css">
- </head>
+    <script type="module" crossorigin src="/LatihanDicoding/assets/index-BDvTvxKt.js"></script>
+    <link rel="stylesheet" crossorigin href="/LatihanDicoding/assets/index-Cx-5u2Lk.css">
+  </head>
 
   <body>
-    <a href="#main-content" class="skip-to-content">Lewati ke konten</a>
+    <!-- Skip to content -->
+    <a href="#main-content" class="skip-to-content">Lewati ke Konten</a>
 
-    <header class="main-header container">
-      <a href="#/" class="brand-name">StoryApp</a>
-      <button id="drawer-button" class="drawer-button" aria-label="Menu">☰</button>
-      <nav id="navigation-drawer" class="navigation-drawer drawer">
-        <ul class="nav-list">
-          <li><a href="#/">Beranda</a></li>
-          <li><a href="#/add">Tambah Story</a></li>
-          <li><a href="#/about">Tentang</a></li>
-          <li><a href="#/saved-stories">Story Tersimpan</a></li>
-        </ul>
-      </nav>
+    <!-- Header -->
+    <header>
+      <div class="main-header container">
+        <a class="brand-name" href="#/">Dicoding Story App</a>
+
+        <nav id="navigation-drawer" class="navigation-drawer">
+          <ul id="nav-list" class="nav-list">
+            <li><a href="#/">Home</a></li>
+            <li><a href="#/add">Tambah Story</a></li>
+            <li><a href="#/about">About</a></li>
+            <li><a href="#/login">Login</a></li>
+            <li><a href="#/register">Register</a></li>
+          </ul>
+        </nav>
+
+        <button id="drawer-button" class="drawer-button">☰</button>
+      </div>
     </header>
 
-    <main id="main-content" class="container">
-      <div id="app"></div>
-    </main>
+    <!-- Main Content -->
+    <main id="main-content" class="main-content"></main>
 
+    <!-- Footer -->
     <footer>
-      <p>&copy; 2025 Dicoding Story App</p>
+      <p>&copy; 2025 Aplikasi Berbagi Story. Semua hak cipta dilindungi.</p>
     </footer>
+
+    <!-- Script untuk toggle drawer -->
+    <script>
+      const drawer = document.getElementById("navigation-drawer");
+      const button = document.getElementById("drawer-button");
+
+      button.addEventListener("click", () => {
+        drawer.classList.toggle("open");
+      });
+    </script>
   </body>
 </html>
